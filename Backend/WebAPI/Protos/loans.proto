@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto"; 
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Backend.WebAPI.Protos";
+
+service ProtoLoanService{
+	rpc CloseLoan(CloseLoanRequest) returns (Response);
+	rpc GetAll(google.protobuf.Empty) returns (GetAllResponse);
+}
+
+message CloseLoanRequest{
+	int32 IDLoan=1;
+}
+
+message Response{
+	string message=1;
+}
+
+message LoanRequest{
+	int32 ID=1;
+	google.protobuf.Timestamp Date=2;
+    google.protobuf.Timestamp ReturnDate=3;
+	bool Status=4;
+	gPRCThing Thing=5;
+    gPRCPerson Person=6;
+}
+
+message GetAllResponse{
+	repeated LoanRequest allLoans=1;
+}
+
+message gPRCThing{
+	int32 ID=1;
+    string Description=2;
+    int32 Category=3;
+}
+
+message gPRCPerson{
+	int32 ID=1;
+	string Name=2;
+    string PhoneNumber=3;
+    string Email=4;
+}

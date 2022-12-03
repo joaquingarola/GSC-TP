@@ -1,0 +1,4 @@
+obj\Debug\net6.0\Protos/Loans.cs \
+obj\Debug\net6.0\Protos/LoansGrpc.cs: C:/Users/joaqu/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/empty.proto\
+ C:/Users/joaqu/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/loans.proto
