@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     const { UserName, Password } = this.register.getRawValue();
     this.authService.register(UserName , Password).subscribe(
       () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/people']);
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;

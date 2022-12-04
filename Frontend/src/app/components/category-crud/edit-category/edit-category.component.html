@@ -1,0 +1,15 @@
+<app-nav></app-nav>
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="update()" class="loginForm">
+    <h2 class="title">Edit Category</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" formControlName="description" required>
+    </mat-form-field>
+    <div *ngIf="error.length !==0" class="error">
+      <span>{{error}}</span>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Edit</button>
+    <a mat-flat-button routerLink="/categories">Go back</a>
+  </form>
+</div>

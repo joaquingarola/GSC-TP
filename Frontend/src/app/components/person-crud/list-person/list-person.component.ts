@@ -1,36 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from "@angular/common/http";
-import Person from '../../models/person';
-import { StorageService } from '../../services/storage.service';
-import { UserService } from '../../services/user.service';
+import Person from '../../../models/person';
+import { StorageService } from '../../../services/storage.service';
+import { UserService } from '../../../services/user.service';
 import { first } from "rxjs";
 
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './list-person.component.html',
+  styleUrls: ['./list-person.component.css']
 })
-export class HomeComponent implements OnInit {
-  isLoged = false;
+export class ListPersonComponent implements OnInit {
   displayedColumns : string[] = ["id", "name", "phoneNumber", "email", "options"];
 	people: Person[] = [];
   error : string = "";
 
   constructor(
     private storageService: StorageService,
-    private userService: UserService
-    ) 
+    private userService: UserService) 
     { }
 
   ngOnInit(): void {
-    this.isLoged = this.storageService.isLoggedIn();
     this.listPeople();
-  }
-
-  logOut(){
-    this.storageService.logOut();
-    this.isLoged = false;
   }
 
   listPeople()

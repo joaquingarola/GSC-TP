@@ -1,6 +1,7 @@
+<app-nav></app-nav>
 <div class="container">
-  <form [formGroup]="editForm" (ngSubmit)="update()" class="loginForm">
-    <h2 class="title">Edit Person</h2>
+  <form [formGroup]="register" (ngSubmit)="create()" class="loginForm">
+    <h2 class="title">New Person</h2>
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" required>
@@ -16,7 +17,7 @@
     <div *ngIf="error.length !==0" class="error">
       <span>{{error}}</span>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Edit</button>
-    <a mat-flat-button routerLink="/home">Go back</a>
+    <button mat-raised-button color="primary" type="submit" [disabled]="register.invalid">Register</button>
+    <a mat-flat-button routerLink="/people">Go back</a>
   </form>
 </div>

@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(UserName, Password).subscribe(
        (data : any) => {
         this.storageService.saveToken(data);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/people']);
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;

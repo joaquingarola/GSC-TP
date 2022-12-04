@@ -34,7 +34,7 @@ export class AddPersonComponent implements OnInit {
     const newPerson : PersonCreationDTO = this.register.getRawValue();
     this.userService.Create(newPerson).subscribe(
       () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/people']);
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;

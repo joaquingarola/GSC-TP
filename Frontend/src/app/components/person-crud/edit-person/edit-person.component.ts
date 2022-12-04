@@ -41,7 +41,7 @@ export class EditPersonComponent implements OnInit {
     const updatedPerson : Person = { id: this.personToUpdate.id, ...this.editForm.getRawValue() } ;
     this.userService.EditPerson(updatedPerson).subscribe(
       () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/people']);
       },
       (response: HttpErrorResponse) => {
         this.error = response.error;

@@ -96,7 +96,7 @@ namespace Backend.WebAPI.Controllers
             }
 
             await _uow.SaveChangesAsync();
-            return Ok("Category removed successfully");
+            return Ok(new { msg = "Person removed successfully" });
         }
     }
 }
