@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Person from 'src/app/models/person';
@@ -12,11 +13,12 @@ import { UserService } from 'src/app/services/user.service';
 export class EditPersonComponent implements OnInit {
   editForm : FormGroup;
   personToUpdate! : Person;
+  error : string = "";
 
   constructor(
-    builder : FormBuilder, 
+    private builder : FormBuilder, 
     private userService : UserService, 
-    private route : Router, 
+    private router : Router, 
     private activateRouter : ActivatedRoute) 
     { 
       this.editForm = builder.group({
@@ -37,7 +39,13 @@ export class EditPersonComponent implements OnInit {
   update()
   {
     const updatedPerson : Person = { id: this.personToUpdate.id, ...this.editForm.getRawValue() } ;
-    this.userService.EditPerson(updatedPerson);
-    this.route.navigate(['/home']);
+    this.userService.EditPerson(updatedPerson).subscribe(
+      () => {
+        this.router.navigate(['/home']);
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
+      }
+    );
   }
 }

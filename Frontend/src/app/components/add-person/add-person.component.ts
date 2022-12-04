@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PersonCreationDTO } from 'src/app/models/person-creation-dto';
@@ -11,11 +12,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddPersonComponent implements OnInit {
   register : FormGroup;
+  error : string = "";
 
   constructor(
-    builder : FormBuilder, 
+    private builder : FormBuilder, 
     private userService: UserService, 
-    private route:Router) 
+    private router : Router) 
     { 
       this.register = builder.group({
         name: ['', [Validators.required]],
@@ -30,7 +32,13 @@ export class AddPersonComponent implements OnInit {
   create()
   {
     const newPerson : PersonCreationDTO = this.register.getRawValue();
-    this.userService.Create(newPerson);
-    this.route.navigate(['/home']);
+    this.userService.Create(newPerson).subscribe(
+      () => {
+        this.router.navigate(['/home']);
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
+      }
+    );
   }
 }

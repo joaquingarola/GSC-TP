@@ -36,5 +36,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div *ngIf="error.length !==0" class="error">
+        <span>{{error}}</span>
+    </div>
     <button mat-raised-button color="primary" [routerLink]="['/people/add']" class="addButton">Create new person</button>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from "@angular/common/http";
 import Person from '../../models/person';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
@@ -10,10 +11,11 @@ import { first } from "rxjs";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnChanges {
+export class HomeComponent implements OnInit {
   isLoged = false;
   displayedColumns : string[] = ["id", "name", "phoneNumber", "email", "options"];
 	people: Person[] = [];
+  error : string = "";
 
   constructor(
     private storageService: StorageService,
@@ -31,10 +33,6 @@ export class HomeComponent implements OnInit, OnChanges {
     this.isLoged = false;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("Changes in ", changes);
-  }
-
   listPeople()
   {
     this.userService.getAll()
@@ -45,13 +43,15 @@ export class HomeComponent implements OnInit, OnChanges {
       });
   }
 
-  ReloadList(){
-    this.listPeople();
-  }
-
   delete(id:number)
   {
-    this.userService.DeletePerson(id.toString())
-    this.people = this.people.filter(person => person.id != id);
+    this.userService.DeletePerson(id.toString()).subscribe(
+      () => {
+        this.listPeople();
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
+      }
+    );
   }
 }

@@ -21,3 +21,10 @@
 .title{
     text-align: center;
 }
+
+.error{
+    text-align: center;
+    font-weight: 600;
+    color: red;
+    margin: 5px;
+}

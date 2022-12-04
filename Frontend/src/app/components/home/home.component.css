@@ -29,3 +29,10 @@
     cursor: pointer;
     margin: 0 5px;
 }
+
+.error{
+    text-align: center;
+    font-weight: 600;
+    color: red;
+    margin: 5px;
+}

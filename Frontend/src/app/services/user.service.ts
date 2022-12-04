@@ -22,14 +22,14 @@ export class UserService {
   }
 
   Create(newPerson: PersonCreationDTO){
-    return this.http.post(API_URL, newPerson).subscribe();
+    return this.http.post(API_URL, newPerson);
   }
 
   DeletePerson(id: string){
-    this.http.delete<{ msg: string }>(`${API_URL}${id}`).subscribe();
+    return this.http.delete<{ msg: string }>(`${API_URL}${id}`);
   }
 
   EditPerson(person: Person){
-    this.http.put(`${API_URL}${person.id}`, person).subscribe();
+    return this.http.put(`${API_URL}${person.id}`, person);
   }
 }

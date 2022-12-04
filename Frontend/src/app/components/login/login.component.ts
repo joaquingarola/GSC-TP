@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
@@ -11,6 +12,7 @@ import { Router  } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   login : FormGroup;
+  error : string = "";
 
   constructor(
     private authService: AuthService, 
@@ -30,11 +32,14 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const { UserName, Password } = this.login.getRawValue();
 
-    this.authService.login(UserName, Password).subscribe({
-      next: (data : any) => {
+    this.authService.login(UserName, Password).subscribe(
+       (data : any) => {
         this.storageService.saveToken(data);
         this.router.navigate(['/home']);
+      },
+      (response: HttpErrorResponse) => {
+        this.error = response.error;
       }
-    });
+    );
   }
 }

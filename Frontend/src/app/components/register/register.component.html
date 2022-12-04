@@ -9,6 +9,9 @@
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="Password" required>
     </mat-form-field>
+    <div *ngIf="error.length !==0" class="error">
+      <span>{{error}}</span>
+    </div>
     <button mat-raised-button color="primary" type="submit" [disabled]="register.invalid">Register</button>
     <a mat-flat-button routerLink="/login">Login</a>
   </form>
